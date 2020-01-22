@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import WeatherItem from "./WeatherItem/WeatherItem";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.meteo = [
+    { j: 'lundi', temps:'soleil'},
+    { j: 'mardi', temps:'soleil'},
+    { j: 'mercredi', temps:'pluie'},
+    { j: 'jeudi', temps:'pluie'},
+    { j: 'vendredi', temps:'pluie'},
+    { j: 'samedi', temps:'pluie'},
+    { j: 'dimanche', temps:'pluie'},
+    ];
+
+    const day = (new Date()).getDay();
+    this.today = this.meteo[day - 1];
+  }
+ 
+  render() {
+    return (
+      <div>
+        <button type="button" onClick={() => this.setState ({ selectedDay : 'toto'});}}>
+   {this.meteo.map((item) => <WeatherItem day={item}/>)}
     </div>
-  );
+    );
+  }
 }
-
 export default App;
